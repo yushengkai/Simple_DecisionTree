@@ -100,3 +100,27 @@ function read_csv(input_file)
   fid:close()
   return attribute_list, instance_list,value_list
 end
+
+function table_len(t)
+  count = 0
+  for k,v in pairs(t) do
+    count = count + 1
+  end
+  return count
+end
+
+function print_node(root, depth)
+  if root.is_leaf then
+    print('depth:'..depth..' leaf_value:'..root.leaf_value)
+  else
+    print('depth:'..depth..' attribute_name:'..root.attribute_name..' attribute_value:'..root.attribute_value)
+  end
+end
+function print_tree(root, depth)
+  if not root then
+    return
+  end
+  print_tree(root.left_child, depth+1)
+  print_node(root, depth)
+  print_tree(root.right_child, depth+1)
+end
