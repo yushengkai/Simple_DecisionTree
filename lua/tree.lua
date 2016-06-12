@@ -87,6 +87,7 @@ Node={
     max_class, is_same = get_leaf_value(instance_idset)
     if depth>flags.depth then
       self.is_leaf = true
+      self.leaf_value = max_class
       return nil
     end
     if is_same then
@@ -133,7 +134,7 @@ Node={
       self.left_child = table.copy(Node)
       self.left_child:learn(left_set, depth+1)
     end
-    if self.left_child.is_leaf then
+    if self.left_child and self.left_child.is_leaf then
       print('leaf_value:'..self.left_child.leaf_value)
     end
     --print(depth..' right_set:')
@@ -142,7 +143,7 @@ Node={
       self.right_child = table.copy(Node)
       self.right_child:learn(right_set, depth+1)
     end
-    if self.right_child.is_leaf then
+    if self.right_child and self.right_child.is_leaf then
       print('leaf_value:'..self.right_child.leaf_value)
     end
   end
